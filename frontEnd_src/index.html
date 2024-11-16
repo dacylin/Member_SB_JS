@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="page.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="title" class="title">頁首</div>
+    <div id="nav" class="nav">
+      <a href="index.html">首頁</a>
+      <a href="login.html">登入</a>
+    </div>
+    <div id="content" class="content">
+      <button onclick="show()">查詢全部會員</button>
+      <div id="app"></div>
+    </div>
+    <div id="end" class="end">頁尾</div>
+
+    <script>
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "http://192.168.115.94:8080/selectAllMember", true);
+      xhr.send();
+
+      function show() {
+        var data = JSON.parse(xhr.responseText);
+        var x = "";
+        for (var i = 0; i < data.length; i++) {
+          x =
+            x +
+            "id: " +
+            data[i].id +
+            "<br>memberno: " +
+            data[i].memberno +
+            "<br>name: " +
+            data[i].name +
+            "<br>username: " +
+            data[i].username +
+            "<hr>";
+        }
+        app.innerHTML = x;
+      }
+    </script>
+  </body>
+</html>
